@@ -1,105 +1,162 @@
-# Zero-Copy Log Analyzer
+# Zero-Copy Log Analyzer (Rust)
 
-## Summary
+## 🚀 Overview
 
-You have been tasked with writing a **high-performance log analyzer** in Rust.
+**Zero-Copy Log Analyzer** is a high-performance, memory-efficient log processing tool written in **Rust**, designed to handle **multi-gigabyte log files** efficiently.
 
-The input is a log file that may be **several gigabytes** in size. Each line in
-the file follows a structured format. The goal is to analyze the file
-efficiently without loading it entirely into memory and without unnecessary
-allocations.
+The project focuses on **streaming I/O**, **zero-copy parsing**, and **robust error handling**, making it suitable for real-world backend, systems, and infrastructure use cases.
 
-The solution should emphasize **streaming processing**, **memory efficiency**,
-and **robust error handling**.
+This is a **production-style Rust project**, not a toy example.
 
+---
 
-## Log Format
+## 📄 Log Format
 
-Each line in the log file follows this format:
+Each log entry is a single line with pipe (`|`) separated fields:
 
 ```
 <timestamp>|<level>|<service>|<message>
 ```
 
-Example:
+### Example
+
 ```
 2025-01-01T12:00:00Z|ERROR|auth|invalid token
 ```
-Where:
-* `timestamp` is an ISO-8601 timestamp
-* `level` is one of `INFO`, `WARN`, or `ERROR`
-* `service` is an alphanumeric service name
-* `message` is free-form text
 
-## Requirements
+### Field Details
 
-### Core Functionality
+| Field     | Description               |
+| --------- | ------------------------- |
+| timestamp | ISO-8601 timestamp        |
+| level     | `INFO`, `WARN`, `ERROR`   |
+| service   | Alphanumeric service name |
+| message   | Free-form text            |
 
-* Read the log file in a **streaming** manner
-* Do not load the entire file into memory
-* Parse each log line and extract the log level
-* Count occurrences of each log level:
-  * `INFO`
-  * `WARN`
-  * `ERROR`
-* Print a summary report after processing the entire file
+---
 
-Example output:
+## ✨ Features
+
+* 📂 **Streaming file processing** (no full file loading)
+* ⚡ **Zero-copy parsing** using `&str` slices
+* 🧠 **Memory-efficient**, constant memory usage
+* 🛡️ **Graceful handling of malformed lines**
+* 🧪 **Unit tested parsing logic**
+* 🧼 **Clippy-clean & rustfmt formatted**
+* 🔒 **Safe Rust only (no `unsafe`)**
+
+---
+
+## 📊 Output
+
+After processing the log file, a summary is printed:
+
 ```
 INFO: 120394
 WARN: 23941
 ERROR: 4821
 ```
 
-## Performance Constraints
+Optionally, malformed lines can be skipped or tracked separately.
 
-* Must use buffered IO
-* Must not read the full file into memory
-* Avoid allocating new `String`s per log line where possible
-* Prefer **zero-copy parsing** using string slices
-* The solution must scale with increasing file size
+---
 
-## Error Handling
+## 🧠 Design Goals
 
-* Malformed lines must not cause the program to crash
-* Invalid lines may be skipped, logged, or counted separately
-* No panics on invalid input
+* Avoid unnecessary allocations
+* Process logs line-by-line
+* Scale linearly with file size
+* Remain robust against invalid input
+* Be suitable for GB-scale production logs
 
-## Additional Requirements
+---
 
-* Your source should contain unit tests where appropriate
-* All code must be formatted using the standard formatting tool
-* Code must compile without clippy errors
-* The solution must use safe Rust only
+## 🛠️ Implementation Highlights
 
-## Design & Reasoning (Required)
+### Streaming I/O
 
-Along with the code, include a document (for example `DESIGN.md`) explaining:
+* Uses `BufReader` for efficient buffered reading
+* Processes logs incrementally to keep memory usage constant
 
-* How the file is read and processed
-* How parsing is performed without unnecessary allocations
-* Where allocations are unavoidable
-* Performance trade-offs made
-* How the solution behaves with very large files
+### Zero-Copy Parsing
 
-Submissions without a design explanation will not be reviewed.
+* Uses delimiter-based parsing (`split`, `splitn`)
+* Extracts fields as `&str` slices
+* Avoids allocating new `String`s per log line
 
-## Submission
+### Error Handling
 
-Please fork this repository to your own GitHub account and submit a pull request
-to your own repository.
+* Invalid or malformed lines do **not** crash the program
+* Errors are handled via `Result`, not panics
+* Supports skipping or counting malformed entries
 
-Your pull request should include:
+---
 
-* A clear description of your approach
-* Any assumptions or trade-offs made
-* Instructions on how to run the program and tests
+## 📁 Project Structure
 
-A link to the pull request can be submitted once it is ready for review.
+```
+.
+├── src/
+│   ├── main.rs        # Entry point & streaming loop
+│   ├── parser.rs     # Zero-copy log parsing logic
+│   └── stats.rs      # Log level counters
+├── tests/
+│   └── parser_tests.rs
+├── DESIGN.md         # Detailed design & performance explanation
+├── Cargo.toml
+└── README.md
+```
 
-## Bonus
+---
+
+## 📘 Design Documentation
+
+See [`DESIGN.md`](./DESIGN.md) for detailed explanations of:
+
+* Streaming processing strategy
+* Zero-copy parsing decisions
+* Allocation trade-offs
+* Behavior with very large files
+* Performance considerations
+
+---
+
+## ▶️ How to Run
+
+```bash
+cargo run --release -- path/to/logfile.log
+```
+
+### 🧪 Run Tests
+
+```bash
+cargo test
+```
+
+---
+
+## 🧩 Bonus / Future Enhancements
 
 * Parallel processing of log file chunks
-* Support for configurable log formats
+* Configurable log formats
 * Separate reporting for malformed lines
-* Benchmark results or performance notes
+* Benchmarking and performance metrics
+
+---
+
+## 🎯 Why This Project?
+
+This project demonstrates:
+
+* Systems-level thinking in Rust
+* Efficient text processing without regex overhead
+* Production-quality error handling
+* Performance-aware design decisions
+
+It is intentionally designed to resemble **real backend / infra tooling** used in production systems.
+
+---
+
+## 📜 License
+
+MIT License (or your pref
