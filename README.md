@@ -92,22 +92,6 @@ Optionally, malformed lines can be skipped or tracked separately.
 
 ---
 
-## 📁 Project Structure
-
-```
-.
-├── src/
-│   ├── main.rs        # Entry point & streaming loop
-│   ├── parser.rs     # Zero-copy log parsing logic
-│   └── stats.rs      # Log level counters
-├── tests/
-│   └── parser_tests.rs
-├── DESIGN.md         # Detailed design & performance explanation
-├── Cargo.toml
-└── README.md
-```
-
----
 
 ## 📘 Design Documentation
 
