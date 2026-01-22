@@ -1,0 +1,14 @@
+2025-01-01T12:00:00Z|INFO|gateway|request received
+2025-01-01T12:00:01Z|INFO|auth|validating token
+2025-01-01T12:00:02Z|WARN|auth|token nearing expiry
+2025-01-01T12:00:03Z|ERROR|auth|invalid token
+2025-01-01T12:00:04Z|INFO|payments|payment initiated
+2025-01-01T12:00:05Z|INFO|payments|payment successful
+2025-01-01T12:00:06Z|WARN|payments|retrying failed callback
+2025-01-01T12:00:07Z|ERROR|payments|callback failed
+2025-01-01T12:00:08Z|INFO|orders|order created
+2025-01-01T12:00:09Z|INFO|orders|order confirmed
+2025-01-01T12:00:10Z|ERROR|orders|order cancellation failed
+2025-01-01T12:00:11Z|INFO|inventory|stock updated
+2025-01-01T12:00:12Z|WARN|inventory|low stock warning
+2025-01-01T12:00:13Z|INFO|inventory|restock scheduled
