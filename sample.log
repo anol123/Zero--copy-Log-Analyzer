@@ -12,3 +12,8 @@
 2025-01-01T12:00:11Z|INFO|inventory|stock updated
 2025-01-01T12:00:12Z|WARN|inventory|low stock warning
 2025-01-01T12:00:13Z|INFO|inventory|restock scheduled
+2025-01-01T12:00:14Z|INFO|missing_message
+INVALID_LINE_WITH_NO_DELIMITERS
+2025-01-01T12:00:15Z|UNKNOWN|auth|unsupported log level
+|ERROR|auth|missing timestamp
+2025-01-01T12:00:16Z|INFO||missing service
