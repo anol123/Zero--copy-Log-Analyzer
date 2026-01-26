@@ -18,4 +18,4 @@ INVALID_LINE_WITH_NO_DELIMITERS
 |ERROR|auth|missing timestamp
 2025-01-01T12:00:16Z|INFO||missing service
 2025-01-01T12:00:17Z|INFO|payments|
-2025-01-01T12:00:19Z|INFO|payments|""|
+2025-01-01T12:00:18Z|INFO|payments|""|
