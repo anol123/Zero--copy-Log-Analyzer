@@ -139,8 +139,4 @@ This project demonstrates:
 
 It is intentionally designed to resemble **real backend / infra tooling** used in production systems.
 
----
 
-## 📜 License
-
-MIT License (or your pref
